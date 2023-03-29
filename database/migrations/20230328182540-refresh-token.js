@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
@@ -7,34 +7,34 @@ module.exports = {
       id: {
         type: Sequelize.UUID,
         allowNull: false,
-        primaryKey: true,
+        primaryKey: true
       },
       user_id: {
         type: Sequelize.UUID,
         allowNull: false,
-        references: { model: 'users', key: 'id' },
+        references: { model: 'users', key: 'id' }
       },
       token: {
         type: Sequelize.STRING(64),
         allowNull: false,
-        unique: true,
+        unique: true
       },
       valid_to: {
         type: Sequelize.DATE,
-        allowNull: false,
+        allowNull: false
       },
       created_at: {
         type: Sequelize.DATE,
-        allowNull: false,
+        allowNull: false
       },
       updated_at: {
         type: Sequelize.DATE,
-        allowNull: true,
+        allowNull: true
       }
-    });
+    })
   },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.dropTable('refreshTokens');
+    await queryInterface.dropTable('refreshTokens')
   }
-};
+}

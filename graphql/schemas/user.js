@@ -1,4 +1,4 @@
-const { gql } = require('apollo-server-express');
+const { gql } = require('apollo-server-express')
 
 module.exports = gql`
     type User {
@@ -13,6 +13,7 @@ module.exports = gql`
     
     extend type Mutation {
         login(input: LoginInput!): LoginResponse
+        refreshToken(input: RefreshTokenInput!): RefreshTokenResponse
     }
 
     input LoginInput {
@@ -25,5 +26,18 @@ module.exports = gql`
         username: String!
         email: String!
         token: String!
+        refreshToken: String!
     }
-`;
+
+    input RefreshTokenInput {
+        refreshToken: String!
+    }
+
+    type RefreshTokenResponse {
+        id: Int!
+        username: String!
+        email: String!
+        token: String!
+        refreshToken: String!
+    }
+`

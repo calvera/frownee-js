@@ -6,7 +6,9 @@
   "scripts": {
     "test": "mocha",
     "start": "node app.js",
-    "dev": "nodemon app.js"
+    "dev": "nodemon app.js",
+    "eslint-fix": "eslint database api admin graphql app.js --fix",
+    "eslint": "eslint database api admin graphql app.js"
   },
   "license": "UNLICENSED",
   "private": true,
@@ -33,6 +35,11 @@
   },
   "devDependencies": {
     "chai": "^4.3.7",
+    "eslint": "^8.0.1",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-n": "^15.0.0",
+    "eslint-plugin-promise": "^6.0.0",
     "mocha": "^10.2.0",
     "nodemon": "^2.0.22",
     "sequelize-cli": "^6.6.0"

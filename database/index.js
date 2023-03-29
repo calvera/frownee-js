@@ -1,9 +1,9 @@
-const cls = require('cls-hooked');
-const namespace = cls.createNamespace('app');
-const { Sequelize } = require('sequelize');
+const cls = require('cls-hooked')
+const namespace = cls.createNamespace('app')
+const { Sequelize } = require('sequelize')
 
-Sequelize.useCLS(namespace);
+Sequelize.useCLS(namespace)
 
-const sequelize = new Sequelize(process.env.DATABASE_URL);
+const sequelize = new Sequelize(process.env.DATABASE_URL)
 
-module.exports = sequelize;
+module.exports = sequelize
