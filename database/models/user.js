@@ -44,6 +44,18 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING(128),
       allowNull: true
     },
+    s3Key: {
+      type: DataTypes.STRING(128),
+      allowNull: true
+    },
+    bucket: {
+      type: DataTypes.STRING(128),
+      allowNull: true
+    },
+    mime: {
+      type: DataTypes.STRING(128),
+      allowNull: true
+    },
     createdAt: {
       type: DataTypes.DATE,
       allowNull: false

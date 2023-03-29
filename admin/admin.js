@@ -8,6 +8,7 @@ const AdminJS = require('adminjs')
 const Connect = require('connect-pg-simple')
 const session = require('express-session')
 const AdminJSExpress = require('@adminjs/express')
+const uploadFeature = require('@adminjs/upload')
 
 AdminJS.registerAdapter({
   Resource: AdminJSSequelize.Resource,
@@ -22,17 +23,31 @@ const authenticate = async (email, password) => {
   return null
 }
 
+const localProvider = {
+  bucket: 'public/files',
+  opts: {
+    baseUrl: '/files'
+  }
+}
+
 const admin = new AdminJS({
   rootPath: '/admin',
   resources: [
     {
       resource: models.User,
       options: {
-        listProperties: ['username', 'email', 'createdAt', 'updatedAt'],
+        listProperties: ['username', 'email', 'createdAt', 'updatedAt', 'file'],
         filterProperties: ['username', 'email'],
-        editProperties: ['username', 'email'],
-        showProperties: ['id', 'username', 'email', 'createdAt', 'updatedAt']
-      }
+        editProperties: ['username', 'email', 'file'],
+        showProperties: ['id', 'username', 'email', 'file', 'createdAt', 'updatedAt']
+      },
+      features: [
+        uploadFeature({
+          provider: { local: localProvider },
+          validation: { mimeTypes: ['image/png', 'image/jpeg'] },
+          properties: { file: 'file', key: 's3Key', bucket: 'bucket', mimeType: 'mime' }
+        })
+      ]
     }
   ]
 })
