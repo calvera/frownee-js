@@ -1,8 +1,6 @@
-'use strict'
+import { gql } from 'apollo-server-express'
 
-const { gql } = require('apollo-server-express')
-
-module.exports = gql`
+export = gql`
     type User {
         id: Int!
         username: String!

@@ -1,6 +1,6 @@
 'use strict'
 
-const models = require('../database/models/')
+const models = require('../database/models')
 const bcrypt = require('bcrypt')
 
 const AdminJSSequelize = require('@adminjs/sequelize')

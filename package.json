@@ -1,14 +1,14 @@
 {
   "name": "nodejs-course",
   "version": "1.0.0",
-  "main": "app.js",
+  "main": "src/app.ts",
   "author": "Karel Sommer",
   "scripts": {
     "test": "mocha",
-    "start": "node app.js",
-    "dev": "nodemon app.js",
-    "eslint-fix": "eslint database api admin graphql app.js --fix",
-    "eslint": "eslint database api admin graphql app.js"
+    "start": "node src/app.ts",
+    "dev": "nodemon src/app.ts",
+    "eslint-fix": "eslint src --fix",
+    "eslint": "eslint src"
   },
   "license": "UNLICENSED",
   "private": true,
@@ -16,6 +16,7 @@
     "@adminjs/express": "^5.1.0",
     "@adminjs/sequelize": "^3.0.0",
     "@adminjs/upload": "^3.0.1",
+    "@types/node": "^18.15.11",
     "adminjs": "^6.8.7",
     "apollo-server-express": "^3.12.0",
     "bcrypt": "^5.1.0",
@@ -36,11 +37,20 @@
     "pg": "^8.10.0",
     "pg-hstore": "^2.3.4",
     "pug": "2.0.0-beta11",
+    "reflect-metadata": "^0.1.13",
     "sequelize": "^6.30.0",
+    "ts-node": "^10.9.1",
     "tslib": "^2.5.0",
+    "typeorm": "^0.3.12",
+    "typescript": "^5.0.2",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
+    "@types/cookie-parser": "^1.4.3",
+    "@types/http-errors": "^2.0.1",
+    "@types/jsonwebtoken": "^9.0.1",
+    "@types/morgan": "^1.9.4",
+    "@types/node-sass-middleware": "^0.0.32",
     "chai": "^4.3.7",
     "eslint": "^8.0.1",
     "eslint-config-standard": "^17.0.0",

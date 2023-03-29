@@ -1,6 +1,5 @@
-'use strict'
+import { gql } from 'apollo-server-express'
 
-const { gql } = require('apollo-server-express')
 const userType = require('./user')
 
 const rootType = gql`
@@ -10,6 +9,6 @@ const rootType = gql`
     type Mutation {
         version: String!
     }
-`
+`.definitions
 
-module.exports = [rootType, userType]
+export = [rootType, userType]
