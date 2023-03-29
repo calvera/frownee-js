@@ -1,3 +1,5 @@
+'use strict'
+
 const models = require('../database/models/')
 const bcrypt = require('bcrypt')
 
@@ -21,6 +23,7 @@ const authenticate = async (email, password) => {
 }
 
 const admin = new AdminJS({
+  rootPath: '/admin',
   resources: [
     {
       resource: models.User,
@@ -61,7 +64,7 @@ const adminRouter = AdminJSExpress.buildAuthenticatedRouter(
       httpOnly: process.env.NODE_ENV === 'production',
       secure: process.env.NODE_ENV === 'production'
     },
-    name: 'adminjs'
+    name: 'Frownee'
   }
 )
 

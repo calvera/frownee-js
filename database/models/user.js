@@ -1,4 +1,5 @@
 'use strict'
+
 const { Model } = require('sequelize')
 const uuid = require('uuid')
 const bcrypt = require('bcrypt')

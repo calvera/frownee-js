@@ -1,3 +1,5 @@
+'use strict'
+
 const { User } = require('../../database/models')
 const jwt = require('jsonwebtoken')
 const { AuthenticationError } = require('apollo-server-express')

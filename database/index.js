@@ -1,3 +1,5 @@
+'use strict'
+
 const cls = require('cls-hooked')
 const namespace = cls.createNamespace('app')
 const { Sequelize } = require('sequelize')
