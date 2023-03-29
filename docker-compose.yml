@@ -1,38 +1,12 @@
 version: '3'
 
 services:
-  database:
-    image: postgres:${POSTGRES_VERSION:-15}-alpine
+  postgres:
+    image: "postgres:15.2"
+    ports:
+      - "5432:5432"
     environment:
-      POSTGRES_DB: ${POSTGRES_DB:-app}
-      # You should definitely change the password in production
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-!ChangeMe!}
-      POSTGRES_USER: ${POSTGRES_USER:-app}
-    volumes:
-      - .volumes/db:/var/lib/postgresql/data:rw
+      POSTGRES_USER: "test"
+      POSTGRES_PASSWORD: "test"
+      POSTGRES_DB: "test"
 
-  redis:
-    image: redis
-    restart: always
-
-  s3:
-    image: minio/minio
-    restart: always
-    volumes:
-      - .volumes/s3:/data
-    command: server /data --console-address ":9090"
-
-  s3-create-bucket:
-    image: minio/mc
-    restart: "no"
-    environment:
-      AWS_S3_BUCKET: ${AWS_S3_BUCKET:-app}
-    depends_on:
-      - s3
-    entrypoint: >
-      /bin/bash -c "
-        mc config host rm local;
-        mc config host add --quiet --api s3v4 local http://s3:9000 minioadmin minioadmin;
-        ! mc mb --quiet local/${AWS_S3_BUCKET:-app}/;
-        mc anonymous set download local/${AWS_S3_BUCKET:-app};
-      "

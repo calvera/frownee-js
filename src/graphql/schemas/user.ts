@@ -1,6 +1,6 @@
-import { gql } from 'apollo-server-express'
+import {gql} from 'graphql-tag'
 
-export = gql`
+const types = gql`
     type User {
         id: Int!
         username: String!
@@ -10,7 +10,7 @@ export = gql`
     extend type Query {
         me: User
     }
-    
+
     extend type Mutation {
         login(input: LoginInput!): LoginResponse
         refreshToken(input: RefreshTokenInput!): RefreshTokenResponse
@@ -40,4 +40,6 @@ export = gql`
         token: String!
         refreshToken: String!
     }
-`
+`.definitions
+
+export default types

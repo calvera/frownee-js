@@ -1,20 +1,14 @@
 version: '3'
 
 services:
-  database:
+  postgres:
     ports:
       - "5432:5432"
+    volumes:
+      - .volumes/db:/var/lib/postgresql/data:rw
 
   mailer:
     image: schickling/mailcatcher
     ports:
       - "1025:1025"
       - "1080:1080"
-
-  redis:
-    ports:
-      - "6379:6379"
-
-  s3:
-    ports:
-      - "9999:9000"

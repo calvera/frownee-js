@@ -1,6 +1,6 @@
-import { gql } from 'apollo-server-express'
+import { gql } from 'graphql-tag'
 
-const userType = require('./user')
+import userType from './user'
 
 const rootType = gql`
     type Query {
@@ -11,4 +11,4 @@ const rootType = gql`
     }
 `.definitions
 
-export = [rootType, userType]
+export = [...rootType, ...userType]
