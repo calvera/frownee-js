@@ -7,3 +7,4 @@ temp/
 .volumes/
 /docker-compose.override.yml
 /.env
+/schema.graphql

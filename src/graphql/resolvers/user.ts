@@ -3,7 +3,6 @@ import * as crypto from 'crypto'
 
 import {User, UserRole} from '../../entity/User'
 import {RefreshToken} from '../../entity/RefreshToken'
-import {AppDataSource} from '../../data-source'
 import {GraphQLError} from 'graphql'
 
 function jwtSign(user) {
@@ -51,7 +50,7 @@ export default {
     Mutation: {
         async login(root, {input}) {
             const {email, password} = input
-            const user = await AppDataSource.manager.findOneBy(User, {email: email})
+            const user = await User.findOneBy({email: email})
             if (user && user.comparePassword(password)) {
                 const jwtToken = jwtSign(user)
                 const refreshToken = await refreshTokenCreate(user)
@@ -61,13 +60,13 @@ export default {
         },
         async refreshToken(root, {input}) {
             const {refreshToken: token} = input
-            const refreshToken = await AppDataSource.manager.findOneBy(RefreshToken, {token: token})
+            const refreshToken = await RefreshToken.findOneBy( {token: token})
             console.log(refreshToken)
             if (refreshToken) {
                 const user = refreshToken.user
                 const jwtToken = jwtSign(user)
                 refreshToken.validUntil = computeValidTo()
-                await AppDataSource.manager.save(refreshToken)
+                await refreshToken.save()
                 return {...user, token: jwtToken, refreshToken: refreshToken.token}
             }
             throw new GraphQLError('Invalid credentials')

@@ -1,13 +1,12 @@
 import {User} from '../../entity/User'
 import * as jwt from 'jsonwebtoken'
-import {AppDataSource} from "../../data-source";
 import {GraphQLError} from 'graphql';
 
 const verifyToken = async (token): Promise<User> => {
     try {
         if (!token) return null
         const {sub} = await jwt.verify(token, process.env.JWT_SECRET)
-        return AppDataSource.manager.findOneBy(User, {id: sub})
+        return User.findOneBy( {id: sub})
     } catch (error) {
         throw new GraphQLError(error.message, {
             extensions: {
