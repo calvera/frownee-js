@@ -8,3 +8,5 @@ temp/
 /docker-compose.override.yml
 /.env
 /schema.graphql
+/src/public/stylesheets/style.css
+/src/public/stylesheets/style.css.map

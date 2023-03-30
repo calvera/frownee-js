@@ -2,10 +2,19 @@ import {config} from 'dotenv'
 import * as express from "express"
 import {NextFunction, Request, Response} from "express"
 import * as bodyParser from "body-parser"
+import * as http from "http";
+import * as path from "path";
+import * as createError from 'http-errors';
+import * as cookieParser from "cookie-parser";
+import * as sassMiddleware from "node-sass-middleware";
+import * as morgan from "morgan";
+
+import usersRouter from "../src/routes/users";
+import indexRouter from "../src/routes/index";
+
 import {Routes} from "./routes"
 import apollo from './graphql/apollo'
 import {AppDataSource} from "./data-source";
-import * as http from "http";
 
 config({path: __dirname + '/../.env'})
 
@@ -31,7 +40,40 @@ AppDataSource.initialize().then(() => {
 
         const httpServer = http.createServer(app);
         apollo(app, httpServer).then(() => {
+
+                app.set('views', path.join(__dirname, 'views'));
+                app.set('view engine', 'pug');
+
+                app.use(morgan('dev'));
+                app.use(express.json());
+                app.use(express.urlencoded({extended: false}));
+                app.use(cookieParser());
+                app.use(sassMiddleware({
+                    src: path.join(__dirname, 'public'),
+                    dest: path.join(__dirname, 'public'),
+                    indentedSyntax: true, // true = .sass and false = .scss
+                    sourceMap: true
+                }));
+                app.use(express.static(path.join(__dirname, 'public')));
+
+                app.use('/', indexRouter);
+                app.use('/users', usersRouter);
+
+                app.use((req, res, next) => {
+                    next(createError(404));
+                });
+
+                // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                app.use((err, req: Request, res: Response, next: NextFunction) => {
+                    res.locals.message = err.message;
+                    res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+                    res.status(err.status ?? 500);
+                    res.render('error');
+                });
+
                 httpServer.listen(PORT)
+
                 console.log(`Started at http://localhost:${PORT}/`)
             }
         )
