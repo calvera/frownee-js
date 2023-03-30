@@ -1,8 +1,10 @@
-import { gql } from 'graphql-tag'
+import {gql} from 'graphql-tag'
 
 import userType from './user'
 
 const rootType = gql`
+    scalar Timestamp
+    
     type Query {
         version: String!
     }
@@ -11,4 +13,4 @@ const rootType = gql`
     }
 `.definitions
 
-export = [...rootType, ...userType]
+export default [...rootType, ...userType]

@@ -1,31 +1,23 @@
-import * as express from 'express'
 import {expressMiddleware} from '@apollo/server/express4';
 import * as cors from 'cors'
 import {json} from 'body-parser';
 
-const typeDefs = require('../graphql/schemas')
-import resolvers from '../graphql/resolvers'
+import typeDefs from './schemas'
+import resolvers from './resolvers'
 import {ApolloServer} from "@apollo/server";
 
-import {context, AppContext} from './context'
+import {AppContext, context} from './context'
+import {Express} from "express";
 
-export default async function start(app) {
-    app.use(cors())
+export default async function start(app: Express) {
 
     const server = new ApolloServer<AppContext>({
         typeDefs,
         resolvers,
-        // context,
         introspection: true,
-        // playground: {
-        //     settings: {
-        //         'schema.polling.enable': false
-        //     }
-        // }
     })
 
     await server.start()
 
-    app.use('/graphql', cors<cors.CorsRequest>(), json(), expressMiddleware(server, { context}));
-    console.log('xxx')
+    app.use('/graphql', cors<cors.CorsRequest>(), json(), expressMiddleware(server, {context}));
 }

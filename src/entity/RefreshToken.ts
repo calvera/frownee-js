@@ -1,4 +1,4 @@
-import {Entity, PrimaryColumn, Column, CreateDateColumn, ManyToOne, BaseEntity} from "typeorm"
+import {BaseEntity, Column, CreateDateColumn, Entity, ManyToOne, PrimaryColumn} from "typeorm"
 import {User} from './User'
 
 @Entity()

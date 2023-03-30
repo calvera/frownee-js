@@ -1,10 +1,19 @@
 import {gql} from 'graphql-tag'
 
 const types = gql`
+    enum UserRole {
+        ADMIN
+        EDITOR
+        USER
+    }
     type User {
-        id: Int!
+        id: String!
         username: String!
         email: String!
+        role: UserRole
+        createdAt: Timestamp
+        updatedAt: Timestamp
+        locked: Boolean
     }
 
     extend type Query {

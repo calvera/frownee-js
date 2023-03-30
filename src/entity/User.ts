@@ -1,15 +1,15 @@
 import {
-    Entity,
-    PrimaryColumn,
+    BaseEntity,
+    BeforeInsert,
+    BeforeUpdate,
     Column,
     CreateDateColumn,
-    UpdateDateColumn,
-    BeforeUpdate,
-    BeforeInsert, BaseEntity
+    Entity,
+    PrimaryColumn,
+    UpdateDateColumn
 } from "typeorm"
-import {v4} from 'uuid'
-
-const bcrypt = require('bcrypt')
+import * as uuid from 'uuid'
+import * as bcrypt from 'bcrypt'
 
 export enum UserRole {
     ADMIN = "admin",
@@ -41,7 +41,7 @@ export class User extends BaseEntity {
     role: UserRole
 
     @Column()
-    locked: boolean = false
+    locked = false
 
     @CreateDateColumn()
     createdAt: Date
@@ -52,7 +52,7 @@ export class User extends BaseEntity {
     constructor() {
         super()
 
-        this.id = v4();
+        this.id = uuid.v4();
     }
 
     @BeforeInsert()
