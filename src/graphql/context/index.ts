@@ -12,6 +12,9 @@ const verifyToken = async (token): Promise<User> => {
         throw new GraphQLError(error.message, {
             extensions: {
                 code: 'UNAUTHENTICATED',
+                http: {
+                    status: 401,
+                }
             },
         });
     }

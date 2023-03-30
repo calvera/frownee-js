@@ -5,6 +5,7 @@ import * as bodyParser from "body-parser"
 import {Routes} from "./routes"
 import apollo from './graphql/apollo'
 import {AppDataSource} from "./data-source";
+import * as http from "http";
 
 config({path: __dirname + '/../.env'})
 
@@ -28,8 +29,9 @@ AppDataSource.initialize().then(() => {
             })
         })
 
-        apollo(app).then(() => {
-                app.listen(PORT)
+        const httpServer = http.createServer(app);
+        apollo(app, httpServer).then(() => {
+                httpServer.listen(PORT)
                 console.log(`Started at http://localhost:${PORT}/`)
             }
         )
