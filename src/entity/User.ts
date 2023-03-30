@@ -40,7 +40,7 @@ export class User extends BaseEntity {
     })
     role: UserRole
 
-    @Column()
+    @Column('boolean')
     locked = false
 
     @CreateDateColumn()
@@ -66,5 +66,17 @@ export class User extends BaseEntity {
 
     comparePassword(password: string): boolean {
         return bcrypt.compareSync(password, this.password)
+    }
+
+    toJSON() {
+        return {
+            id: this.id,
+            username: this.username,
+            email: this.email,
+            role: this.role,
+            locked: this.locked,
+            createdAt: this.createdAt,
+            updatedAt: this.updatedAt
+        }
     }
 }

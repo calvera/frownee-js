@@ -18,6 +18,7 @@ AppDataSource.initialize().then(() => {
         Routes.forEach(route => {
             (app)[route.method](route.route, (req: Request, res: Response, next: NextFunction) => {
                 const result = (new (route.controller))[route.action](req, res, next)
+                res.contentType('application/json')
                 if (result instanceof Promise) {
                     result.then(result => result !== null && result !== undefined ? res.send(result) : undefined)
 

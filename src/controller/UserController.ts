@@ -8,7 +8,6 @@ export class UserController {
     private userRepository = AppDataSource.getRepository(User)
 
     async all() {
-        console.log(this.userRepository)
         return this.userRepository.find()
     }
 
