@@ -1,8 +1,8 @@
 import {BaseEntity, Column, CreateDateColumn, Entity, ManyToOne, PrimaryColumn} from "typeorm"
-import {User} from './User'
+import User from './User'
 
 @Entity()
-export class RefreshToken extends BaseEntity {
+class RefreshToken extends BaseEntity {
 
     @PrimaryColumn({length: 32})
     token: string
@@ -16,3 +16,5 @@ export class RefreshToken extends BaseEntity {
     @Column()
     validUntil: Date
 }
+
+export default RefreshToken

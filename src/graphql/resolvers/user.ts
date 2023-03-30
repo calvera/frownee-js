@@ -1,8 +1,8 @@
 import * as jwt from 'jsonwebtoken'
 import * as crypto from 'crypto'
 
-import {User, UserRole} from '../../entity/User'
-import {RefreshToken} from '../../entity/RefreshToken'
+import User, {UserRole} from '../../entity/User'
+import RefreshToken from '../../entity/RefreshToken'
 import {GraphQLError} from 'graphql'
 
 function jwtSign(user) {

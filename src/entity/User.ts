@@ -18,7 +18,7 @@ export enum UserRole {
 }
 
 @Entity()
-export class User extends BaseEntity {
+class User extends BaseEntity {
 
     @PrimaryColumn('uuid')
     id: string
@@ -80,3 +80,5 @@ export class User extends BaseEntity {
         }
     }
 }
+
+export default User

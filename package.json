@@ -19,6 +19,7 @@
       "eslint": "^8.37.0",
       "jest": "^29.5.0",
       "mocha": "^10.2.0",
+      "nodemon": "^2.0.22",
       "pug-lint": "^2.7.0",
       "ts-jest": "^29.0.5",
       "ts-node": "^10.9.1",
@@ -49,7 +50,7 @@
       "uuid": "^9.0.0"
    },
    "scripts": {
-      "dev": "ts-node-dev src/index.ts",
+      "dev": "nodemon src/index.ts",
       "start": "ts-node src/index.ts",
       "fixtures": "fixtures-ts-node-commonjs",
       "typeorm": "typeorm-ts-node-commonjs",

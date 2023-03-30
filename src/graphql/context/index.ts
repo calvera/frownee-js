@@ -1,4 +1,4 @@
-import {User} from '../../entity/User'
+import User from '../../entity/User'
 import * as jwt from 'jsonwebtoken'
 import {GraphQLError} from 'graphql';
 

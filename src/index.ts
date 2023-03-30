@@ -1,6 +1,6 @@
 import {config} from 'dotenv'
 import * as express from "express"
-import {NextFunction, Request, Response} from "express"
+import {NextFunction, Request, Response, Router} from "express"
 import * as bodyParser from "body-parser"
 import * as http from "http";
 import * as path from "path";
@@ -12,9 +12,9 @@ import * as morgan from "morgan";
 import usersRouter from "../src/routes/users";
 import indexRouter from "../src/routes/index";
 
-import {Routes} from "./routes"
+import ApiRoutes from "./api/Routes"
 import apollo from './graphql/apollo'
-import {AppDataSource} from "./data-source";
+import AppDataSource from "./data-source";
 
 config({path: __dirname + '/../.env'})
 
@@ -25,8 +25,9 @@ app.use(bodyParser.json())
 const PORT = process.env.PORT ?? 3000;
 
 AppDataSource.initialize().then(() => {
-        Routes.forEach(route => {
-            (app)[route.method](route.route, (req: Request, res: Response, next: NextFunction) => {
+        const r = Router()
+        ApiRoutes.forEach(route => {
+            (r)[route.method](route.route, (req: Request, res: Response, next: NextFunction) => {
                 const result = (new (route.controller))[route.action](req, res, next)
                 res.contentType('application/json')
                 if (result instanceof Promise) {
@@ -37,6 +38,7 @@ AppDataSource.initialize().then(() => {
                 }
             })
         })
+        app.use('/api', r)
 
         const httpServer = http.createServer(app);
         apollo(app, httpServer).then(() => {

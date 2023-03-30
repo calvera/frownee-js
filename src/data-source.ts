@@ -1,7 +1,6 @@
 import "reflect-metadata"
 import {DataSource, DataSourceOptions} from "typeorm"
 
-console.log(__dirname)
 export const AppDataSourceOptions: DataSourceOptions = {
     type: 'postgres',
     url: process.env.DATABASE_URL ?? 'postgres://test:test@localhost:5432/test',
@@ -12,4 +11,6 @@ export const AppDataSourceOptions: DataSourceOptions = {
     subscribers: [__dirname + "/subscribers/*.ts"],
 };
 
-export const AppDataSource = new DataSource(AppDataSourceOptions)
+const AppDataSource = new DataSource(AppDataSourceOptions)
+
+export default AppDataSource
