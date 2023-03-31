@@ -1,6 +1,6 @@
-import AppDataSource from "../data-source"
+import AppDataSource from "../../data-source"
 import {Request} from "express"
-import User from "../entity/User"
+import User from "../../entity/User"
 import {validate} from "uuid"
 
 export class UserController {

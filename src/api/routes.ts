@@ -1,6 +1,6 @@
-import {UserController} from "./UserController"
+import {UserController} from "./controllers/UserController"
 
-const Routes = [{
+const routes = [{
     method: "get",
     route: "/users",
     controller: UserController,
@@ -22,4 +22,4 @@ const Routes = [{
     action: "remove"
 }]
 
-export default Routes
+export default routes
