@@ -41,8 +41,9 @@ export default {
     UserRole: UserRole,
     Query: {
         async me(_, __, {user = null}) {
+
             if (user) {
-                return {...user}
+                return {...await user}
             }
             return null
         }
@@ -61,7 +62,6 @@ export default {
         async refreshToken(root, {input}) {
             const {refreshToken: token} = input
             const refreshToken = await RefreshToken.findOneBy( {token: token})
-            console.log(refreshToken)
             if (refreshToken) {
                 const user = refreshToken.user
                 const jwtToken = jwtSign(user)

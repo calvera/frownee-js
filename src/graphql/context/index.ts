@@ -6,7 +6,7 @@ const verifyToken = async (token): Promise<User> => {
     try {
         if (!token) return null
         const {sub} = await jwt.verify(token, process.env.JWT_SECRET)
-        return User.findOneBy( {id: sub})
+        return User.findOneBy({id: sub})
     } catch (error) {
         throw new GraphQLError(error.message, {
             extensions: {
@@ -20,12 +20,11 @@ const verifyToken = async (token): Promise<User> => {
 }
 
 export class AppContext {
-    user?: User;
+    user?: Promise<User> = null;
 }
 
 export async function context({req}): Promise<AppContext> {
     const token = ((req.headers && req.headers.authorization) || '').replace('Bearer ', '')
     if (!token) return {user: null}
-    const user = await verifyToken(token)
-    return {user}
+    return {user: verifyToken(token)}
 }

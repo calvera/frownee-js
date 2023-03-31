@@ -14,12 +14,12 @@ const router = Router()
 session(router)
 
 router.use(sassMiddleware({
-    src: path.join(__dirname, 'public'),
-    dest: path.join(__dirname, 'public'),
+    src: path.join(__dirname, '../public'),
+    dest: path.join(__dirname, '../public'),
     indentedSyntax: true, // true = .sass and false = .scss
     sourceMap: true
 }));
-router.use(express.static(path.join(__dirname, 'public')));
+router.use(express.static(path.join(__dirname, '../public')));
 
 router.use('/', homepageRouter);
 router.use('/users', usersRouter);
