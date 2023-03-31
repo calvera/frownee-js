@@ -1,10 +1,18 @@
-import {Router} from 'express'
+import {Request, Response, Router} from 'express'
 
 const router = Router();
 
-/* GET home page. */
-router.get('/', function (req, res) {
-    res.render('index', {title: 'Express'});
+router.get('/', function (req: Request, res: Response) {
+    if (req.session.views) {
+        req.session.views++
+    } else {
+        req.session.views = 1
+    }
+    res.render(
+        'index', {
+            title: 'Express',
+            views: req.session.views
+        });
 });
 
 export default router

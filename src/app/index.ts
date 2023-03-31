@@ -1,19 +1,18 @@
 import * as express from "express";
 import {NextFunction, Request, Response, Router} from "express";
 import * as path from "path";
-import * as cookieParser from "cookie-parser";
 import * as sassMiddleware from "node-sass-middleware";
 import * as createError from 'http-errors';
 
 import homepageRouter from "./controllers/homepage";
 import usersRouter from "./controllers/users";
 
+import session from './session'
+
 const router = Router()
 
-router.use(express.json());
-router.use(express.urlencoded({extended: false}));
+session(router)
 
-router.use(cookieParser());
 router.use(sassMiddleware({
     src: path.join(__dirname, 'public'),
     dest: path.join(__dirname, 'public'),

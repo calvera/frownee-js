@@ -1,4 +1,7 @@
 import {config} from 'dotenv'
+
+config({path: __dirname + '/../.env', debug: true})
+
 import * as express from "express"
 import * as http from "http";
 import * as morgan from "morgan";
@@ -8,8 +11,6 @@ import appRouter from "./app/"
 import apollo from './graphql/apollo'
 import AppDataSource from "./data-source";
 import * as path from "path";
-
-config({path: __dirname + '/../.env'})
 
 const PORT = process.env.PORT ?? 3000;
 
