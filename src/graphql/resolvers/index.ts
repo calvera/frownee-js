@@ -3,7 +3,7 @@ import * as format from 'date-format'
 import userResolvers from './user'
 import {ApolloServerErrorCode} from "@apollo/server/errors";
 
-const timestampScalar = new GraphQLScalarType({
+const timestampScalar = new GraphQLScalarType<Date, string>({
     name: 'Timestamp',
     description: 'Timestamp',
     serialize(value) {

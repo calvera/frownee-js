@@ -2,7 +2,7 @@ import { ISession } from "connect-typeorm";
 import { Column, DeleteDateColumn, Entity, Index, PrimaryColumn } from "typeorm";
 
 @Entity()
-export class Session implements ISession {
+class Session implements ISession {
     @PrimaryColumn("varchar", { length: 255 })
     public id = "";
 
@@ -16,3 +16,5 @@ export class Session implements ISession {
     @DeleteDateColumn()
     public destroyedAt?: Date;
 }
+
+export default Session

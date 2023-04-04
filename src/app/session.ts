@@ -3,7 +3,7 @@ import {Router} from "express";
 import AppDataSource from "../data-source";
 import * as ExpressSession from "express-session";
 
-import {Session} from "../entity/Session";
+import Session from "../entity/Session";
 
 declare module 'express-session' {
     interface SessionData {
