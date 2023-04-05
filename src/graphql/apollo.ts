@@ -24,7 +24,7 @@ export default async function start(app: Express, httpServer) {
 
     app.use(
         '/graphql',
-        cors<cors.CorsRequest>({origin: ['https?://*.frownee.com/*', 'https://studio.apollographql.com/*']}),
+        cors<cors.CorsRequest>({origin: ['https?://*.example.com/*', 'https://studio.apollographql.com/*']}),
         json(),
         expressMiddleware(server, {context})
     );

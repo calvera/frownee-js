@@ -2,9 +2,9 @@ entity: User
 items:
   admin:
     username: admin
-    email: admin@frownee.com
+    email: admin@example.com
     role: admin
     plainPassword: admin
   user{1..10}:
     username: 'user($current)'
-    email: 'user($current)@frownee.com'
+    email: 'user($current)@example.com'
